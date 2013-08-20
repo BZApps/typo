@@ -147,6 +147,16 @@
       <%= render 'admin/content/attachment', { :attachment_num => 1, :hidden => false } -%>
     </ul>
   </div>    
+
+  <div class=''>
+    <h4><%= _("Merge Articles") %></h4>
+    <p class='help-block'>Articles should be merged...</p>
+    <div>
+    Article ID <%= text_field 'merge_article', 'id', {:class => 'span1', :style => ' width: 25%', :placeholder => _('merge_article') } %>
+    </div>
+    <span id='merge_articles_link'><%= link_to(_("Merge Articles"), {:controller => '/articles', :action => 'merge_articles', :id => @article.id, :merge_article_id => @merge_article_id}, {:target => 'merge', :class => 'btn info'}) unless @article.id.nil? or @article.id == @merge_article_id %></span>
+  </div>    
+
   </div>
 
 </div>

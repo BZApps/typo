@@ -146,6 +146,9 @@ class ArticlesController < ContentController
     render :text => TextFilter.find(params[:id]).commenthelp
   end
 
+  def merge_articles
+  end
+
   private
 
   def verify_config
@@ -175,7 +178,6 @@ class ArticlesController < ContentController
   rescue ActiveRecord::RecordNotFound
     error("Post not found...")
   end
-
 
   def article_meta
     groupings = @article.categories + @article.tags
