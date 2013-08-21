@@ -416,6 +416,17 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge_articles (merge_article_id)
+    @new_article = Article[merge_article_id]
+    if @new_article == nil || @new_article.id == self.id then
+      notify_via_email
+    else
+      #merge them
+      body += "\n<!--merged article-->\n" + @new_article.body
+    end
+    
+  end
+
   protected
 
   def set_published_at
@@ -467,6 +478,4 @@ class Article < Content
     return from..to
   end
 
-  def merge_articles (merge_article_id)
-  end
 end

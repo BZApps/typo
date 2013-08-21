@@ -154,7 +154,7 @@
     <div>
     Article ID <%= text_field 'merge_article', 'id', {:class => 'span1', :style => ' width: 25%', :placeholder => _('merge_article') } %>
     </div>
-    <span id='merge_with'><%= link_to(_("Merge Articles"), {:controller => '/articles', :action => 'merge_with', :id => @article.id, :merge_article_id => @merge_article_id}, {:target => 'merge', :class => 'btn info'}) unless @article.id.nil? or @article.id == @merge_article_id %></span>
+    <span id='merge_with'><%= link_to(_("Merge Articles"), {:controller => '/articles', :action => 'merge_with', :id => @article.id, :merge_article_id => @merge_article_id}, {:target => 'merge_with', :class => 'btn info'}) unless @article.id.nil? or @article.id == @merge_article_id %></span>
   </div>    
 
   </div>
