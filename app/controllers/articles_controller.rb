@@ -146,10 +146,6 @@ class ArticlesController < ContentController
     render :text => TextFilter.find(params[:id]).commenthelp
   end
 
-  def merge_with
-    redirect_to root_path
-  end
-
   private
 
   def verify_config

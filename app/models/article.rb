@@ -416,15 +416,22 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
-  def merge_articles (merge_article_id)
-    @new_article = Article[merge_article_id]
-    if @new_article == nil || @new_article.id == self.id then
-      notify_via_email
-    else
-      #merge them
-      body += "\n<!--merged article-->\n" + @new_article.body
+  def merge_with (merge_article_id)
+    new_article = Article.find_by_id(merge_article_id)
+    if new_article == nil || new_article.id == self.id then
+      return false
     end
-    
+
+
+      #merge them
+      self.body += "\n<!--merged article-->\n" + new_article.body
+      self.comments << new_article.comments
+      self.save!
+
+      new_article = Article.find_by_id(merge_article_id)
+      new_article.destroy
+
+      return true
   end
 
   protected

@@ -23,8 +23,15 @@ module NavigationHelpers
     #
     #   when /^(.*)'s profile page$/i
     #     user_profile_path(User.find_by_login($1))
+    when /^the Edit Page of Article with id (\d+)$/
+      "/admin/content/edit/#{$1}"
+
     when /^the edit (.*) article page$/
       '/admin/content/edit/'+$1
+
+    when /^the Edit Page of Artcile with id (.*)$/
+      '/admin/content/edit/'+$1
+    
     else
       begin
         page_name =~ /^the (.*) page$/

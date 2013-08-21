@@ -29,6 +29,7 @@ class Admin::ContentController < Admin::BaseController
 
   def edit
     @article = Article.find(params[:id])
+    @user_is_admin = Profile.find(current_user.profile_id).label == "admin"
     unless @article.access_by? current_user
       redirect_to :action => 'index'
       flash[:error] = _("Error, you are not allowed to perform this action")
@@ -84,6 +85,23 @@ class Admin::ContentController < Admin::BaseController
       nil
     end
   end
+
+  def merge_with
+    unless Profile.find(current_user.profile_id).label == "admin"
+      flash[:error] = _("You are not allowed to perform a merge action")
+      redirect_to :action => :index
+    end
+    
+    article = Article.find_by_id(params[:id])
+    if article.merge_with(params[:merge_with])
+      flash[:notice] = _("Articles successfully merged!")
+      redirect_to :action => :index
+    else
+      flash[:notice] = _("Articles couldn't be merged")
+      redirect_to :action => :edit, :id => params[:id]
+    end
+  end 
+
 
   def autosave
     id = params[:id]
